@@ -56,7 +56,6 @@ static inline uint16_t parse_ipv6(const unsigned char* pkt, uint16_t len)
 
 	ip6h = (struct ip6_hdr*)(pkt);
 
-
 	ip6h->ip6_src = encrypt_ipv6(&ip6h->ip6_src);
 	ip6h->ip6_dst = encrypt_ipv6(&ip6h->ip6_dst);
 
@@ -124,7 +123,6 @@ static inline uint16_t parse_ethernet(const unsigned char* pkt, uint16_t len)
 	default:
 		return 0;
 	}
-	;
 }
 
 uint16_t anonimize(uint16_t datalink, const struct pcap_pkthdr* hdr, const unsigned char* pkt)
@@ -135,6 +133,6 @@ uint16_t anonimize(uint16_t datalink, const struct pcap_pkthdr* hdr, const unsig
 
 	default:
 		/** no headers found **/
-		return hdr->caplen;
+		return 0;
 	}
 }
