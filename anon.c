@@ -84,12 +84,12 @@ void process_opt(int argc, char *argv[])
 			break;
 		default:
 			usage();
-			abort();
+			exit(1);
 		}
 	}
 	if (input_pcap_file == NULL || output_pcap_file == NULL) {
 		usage();
-		abort();
+		exit(1);
 	}
 }
 
@@ -151,7 +151,7 @@ char *read_bpf(char* filename)
 	}
 	else {
 		fprintf(stderr, "File not found %s\n", filename);
-		abort();
+		exit(1);
 	}
 	return buffer;
 }
@@ -181,7 +181,7 @@ int main(int argc, char* argv[])
 	in_pcap = pcap_open_offline(input_pcap_file, err);
 	if (!in_pcap) {
 		fprintf(stderr, "Error: cannot open %s for reading (code %s)\n", input_pcap_file, err);
-		abort();
+		exit(1);
 	}
 
 	if (bpf_filter_file)
@@ -192,14 +192,14 @@ int main(int argc, char* argv[])
 		if(pcap_compile(in_pcap, &fp, bpf_buffer, 1, PCAP_NETMASK_UNKNOWN) == -1)
 		{
 			fprintf(stderr, "Error calling pcap_compile: %s\n", bpf_buffer);
-			abort();
+			exit(1);
 		}
 
 		/* set the compiled program as the filter */
 		if(pcap_setfilter(in_pcap, &fp) == -1)
 		{
 			fprintf(stderr, "Error setting filter\n");
-			abort();
+			exit(1);
 		}
 		free(bpf_buffer);
 	}
@@ -209,7 +209,7 @@ int main(int argc, char* argv[])
 	pdumper = pcap_dump_open(out_pcap, output_pcap_file);
 	if (!out_pcap) {
 		fprintf(stderr, "Error: cannot open %s for writing (code %s)\n", output_pcap_file, err);
-		abort();
+		exit(1);
 	}
 
 	datalink = pcap_datalink(in_pcap);
