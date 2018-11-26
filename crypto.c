@@ -39,7 +39,7 @@ void initialize_crypto(char *basenamedir)
 
 	encrypt_init(key, KEY_SIZE);
 
-	keyfile = (char*)malloc(strlen(basenamedir) + strlen("/CPanKey_") + 2);
+	keyfile = (char*)malloc(strlen(basenamedir) + strlen("/CPanKey.key") + 2);
 	strcpy(keyfile, basenamedir);
 	strcat(keyfile, "/CPanKey.key");
 
@@ -54,6 +54,7 @@ void initialize_crypto(char *basenamedir)
 
 	free(enc_key);
 	free(keyfile);
+	free(key);
 }
 
 uint32_t encrypt_ip(uint32_t orig_addr)

@@ -3,7 +3,7 @@ CC       = gcc
 LIB      = lib
 
 CFLAGS  += -I $(LIB) -Wall -ansi -pedantic -std=gnu11 -O3 -DDEBUG -g
-CFLAGS  += -I $(LIB) -Wall -ansi -pedantic -std=gnu11 -O3 -g
+# CFLAGS  += -I $(LIB) -Wall -ansi -pedantic -std=gnu11 -O3 -g
 LDFLAGS += -pthread -lpcap -lrt
 
 OFILES  = rijndael.o panon.o crypto.o parser.o anon.o
