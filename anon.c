@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
 	char* out_file = strdup(output_pcap_file);
 	char* out_folder = dirname(out_file);
 	initialize_crypto(out_folder);
-	free(out_folder);
+	free(out_file);
 
 	/** input pcap file **/
 	in_pcap = pcap_open_offline(input_pcap_file, err);
